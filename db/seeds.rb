@@ -6,3 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+yc = YahooFinance::Client.new
+stock_data = yahoo_client.quotes(yahoo_client.symbols_by_market('us', 'nasdaq'), [:symbol, :name, :close])
+
+stock_data.each do |stock|
+  Stock.create(symbol: stock.symbol, name: stock.name, exchange: "nasdaq", close: stock.close)
+end
+

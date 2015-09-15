@@ -42,6 +42,9 @@ group :development, :test do
   gem 'meta_request'
   gem 'binding_of_caller'
   gem 'better_errors'
+
+  gem 'fabrication'
+  gem 'faker'
 end
 
 group :development do
