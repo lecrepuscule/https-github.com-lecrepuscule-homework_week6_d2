@@ -1,0 +1,7 @@
+<h1>Portfolio Compositions</h1>
+
+<ul>
+  <% @portfolio.stocks.each do |stock| %>
+  <li><%= link_to stock.name, stock %></li>
+  <% end %>
+</ul>

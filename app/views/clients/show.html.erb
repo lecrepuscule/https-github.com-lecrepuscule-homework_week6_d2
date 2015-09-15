@@ -5,3 +5,5 @@
   <li><%= link_to "#{p.name},  position: #{@client.position(p)}", p %></li>
 <% end %>
 </ul>
+
+<h2>Total PnL is $<%= @client.total_pnl %></h2>
