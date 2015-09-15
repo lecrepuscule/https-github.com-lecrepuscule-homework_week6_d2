@@ -1,0 +1,7 @@
+<h1>Client Portfolios:</h1>
+
+<ul>
+<% @client.portfolios.each do |p| %>
+  <li><%= link_to "#{p.name},  position: #{@client.position(p)}", p %></li>
+<% end %>
+</ul>
