@@ -16,8 +16,8 @@ Fabricator(:portfolio) do
   divisor {10}
 end
 
-10.times {Fabricate(:client)}
-10.times {Fabricate(:portfolio)}
+20.times {Fabricate(:client)}
+20.times {Fabricate(:portfolio)}
 
 yc = YahooFinance::Client.new
 stock_data = yahoo_client.quotes(yahoo_client.symbols_by_market('us', 'nasdaq'), [:symbol, :name, :close])
@@ -25,4 +25,19 @@ stock_data = yahoo_client.quotes(yahoo_client.symbols_by_market('us', 'nasdaq'),
 stock_data.each do |stock|
   Stock.create(symbol: stock.symbol, name: stock.name, exchange: "nasdaq", close: stock.close)
 end
+
+100.times do |i|
+  p = Portfolio.find(((i+1)/5.0).ceil)
+  s = Stock.all.sample
+  p.portfolio_compositions.create(stock: s, weight: 1)
+end
+
+100.times do |i|
+  c = Client.find(((i+1)/5.0).ceil)
+  p = Portfolio.all.sample
+  q = Random.new.rand(1..100)
+  c.trades.create(portfolio: p, quantity: q, deal_id: i, traded_price: )
+end
+
+
 
