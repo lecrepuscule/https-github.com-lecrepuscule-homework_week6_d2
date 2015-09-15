@@ -20,7 +20,7 @@ end
 20.times {Fabricate(:portfolio)}
 
 yc = YahooFinance::Client.new
-stock_data = yahoo_client.quotes(yahoo_client.symbols_by_market('us', 'nasdaq'), [:symbol, :name, :close])
+stock_data = yc.quotes(yc.symbols_by_market('us', 'nasdaq'), [:symbol, :name, :close])
 
 stock_data.each do |stock|
   Stock.create(symbol: stock.symbol, name: stock.name, exchange: "nasdaq", close: stock.close)
@@ -36,7 +36,7 @@ end
   c = Client.find(((i+1)/5.0).ceil)
   p = Portfolio.all.sample
   q = Random.new.rand(1..100)
-  c.trades.create(portfolio: p, quantity: q, deal_id: i, traded_price: )
+  c.trades.create(portfolio: p, quantity: q, deal_id: i, traded_price: p.value)
 end
 
 
