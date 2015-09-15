@@ -35,7 +35,7 @@ end
 100.times do |i|
   c = Client.find(((i+1)/5.0).ceil)
   p = Portfolio.all.sample
-  q = Random.new.rand(1..100)
+  q = Random.new.rand(-100..100)
   c.trades.create(portfolio: p, quantity: q, deal_id: i, traded_price: p.value)
 end
 
