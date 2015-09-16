@@ -16,7 +16,9 @@ class ClientsController < ApplicationController
   def create_trade
     @client = Client.find(params[:id])
     deal_id = @client.trades.max.deal_id + 1
-    @client.trade_portfolio(params[:portfolio], params[:quantity], deal_id)    
+    if @client.trade_portfolio(params[:trade][:portfolio_id], params[:trade][:quantity], deal_id)    
+      redirect_to @client
+    end
   end
 
   private

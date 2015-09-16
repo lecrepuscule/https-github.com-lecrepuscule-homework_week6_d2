@@ -3,8 +3,9 @@ class Client < ActiveRecord::Base
   has_many :portfolios, through: :trades
   has_many :stocks, through: :portfolios
 
-  def trade_portfolio(portfolio, quantity, deal_id)
-    self.cash_balance -= (portfolio.value * quantity)
+  def trade_portfolio(portfolio_id, quantity, deal_id)
+    portfolio = Portfolio.find(portfolio_id)
+    self.cash_balance -= (portfolio.value * quantity.to_f)
     self.update(cash_balance: self.cash_balance)
     trade = self.trades.new(quantity: quantity, traded_price: portfolio.value, deal_id: deal_id, portfolio: portfolio)
     trade.save

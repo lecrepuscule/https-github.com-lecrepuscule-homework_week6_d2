@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   resources :clients
   resources :portfolios
   resources :stocks
+  resources :trades
+
+  get "/clients/:id/trades/new" => "clients#new_trade", as: "new_client_trade"
+  post "/clients/:id/trades" => "clients#create_trade"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
