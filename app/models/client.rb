@@ -5,9 +5,10 @@ class Client < ActiveRecord::Base
 
   def trade_portfolio(portfolio_id, quantity, deal_id)
     portfolio = Portfolio.find(portfolio_id)
-    self.cash_balance -= (portfolio.value * quantity.to_f)
+    cash_flow = portfolio.value
+    self.cash_balance -= (cash_flow* quantity.to_f)
     self.update(cash_balance: self.cash_balance)
-    trade = self.trades.new(quantity: quantity, traded_price: portfolio.value, deal_id: deal_id, portfolio: portfolio)
+    trade = self.trades.new(quantity: quantity, traded_price: cash_flow, deal_id: deal_id, portfolio: portfolio)
     trade.save
   end
 
@@ -19,7 +20,7 @@ class Client < ActiveRecord::Base
   end
 
   def pnl portfolio
-    portfolio.value * position(portfolio) - traded_value(portfolio)
+    portfolio.value_on_close * position(portfolio) - traded_value(portfolio)
   end
 
   def traded_value portfolio

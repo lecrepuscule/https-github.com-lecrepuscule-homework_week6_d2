@@ -12,5 +12,12 @@ class Portfolio < ActiveRecord::Base
     end
   end
 
+  def value_on_close
+    compositions = self.stocks
+    compositions.inject(0) do |value, stock|
+      value += stock.close
+    end
+  end
+
 
 end

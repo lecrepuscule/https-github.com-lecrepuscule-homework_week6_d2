@@ -8,4 +8,5 @@ class Stock < ActiveRecord::Base
     yahoo_client.quotes([self.symbol],[:last_trade_price]).first.last_trade_price.to_f
   end
 
+
 end

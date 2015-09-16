@@ -2,6 +2,8 @@
 
 <ul>
   <% @portfolio.stocks.each do |stock| %>
-  <li><%= link_to stock.name, stock %></li>
+  <li><%= link_to stock.name, stock %> Previous Close: <%=  number_to_currency(stock.close) %></li>
   <% end %>
 </ul>
+
+<h2>Portfolio value on previous close: <%= number_to_currency(@portfolio.value_on_close) %></h2>

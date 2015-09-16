@@ -6,6 +6,8 @@
 <% end %>
 </ul>
 
-<h2>Total PnL is $<%= @client.total_pnl %></h2>
+<h2>Total PnL is <%= number_to_currency(@client.total_pnl) %></h2>
+
+<h2>Cash Balance is <%= number_to_currency(@client.cash_balance) %></h2>
 
 <%= link_to "New Trade", new_client_trade_path %>
